@@ -29,6 +29,11 @@ public class HomePage {
             CreateOrder order = new CreateOrder(stage);
             order.initializeComponents();
         });
+        Button viewOrderBtn = new Button("View Orders");
+        viewOrderBtn.setOnAction(e -> {
+            ViewOrders view = new ViewOrders(stage);
+            view.initializeComponents();
+        });
         Button menuBtn = new Button("Menu");
         Button inventoryBtn = new Button("Inventory");
         Button paymentBtn = new Button("Payments");
@@ -37,6 +42,7 @@ public class HomePage {
                 reservationBtn,
                 viewResBtn,
                 orderBtn,
+                viewOrderBtn,
                 menuBtn,
                 inventoryBtn,
                 paymentBtn
