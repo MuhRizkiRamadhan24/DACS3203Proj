@@ -30,7 +30,7 @@ public class UserLogin {
 
             //no DB yet
             if (username.equals("admin") && password.equals("1234")) {
-                RestaurantHomePage home = new RestaurantHomePage(stage);
+                HomePage home = new HomePage(stage);
                 home.initializeComponents();
             } else {
                 showAlert("Error", "Invalid login");
