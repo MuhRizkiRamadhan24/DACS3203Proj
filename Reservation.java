@@ -12,6 +12,9 @@ public class Reservation {
         this.stage = stage;
     }
 
+    public Reservation(String ali, String date, String number) {
+    }
+
     public void initializeComponents() {
 
         TextField nameField = new TextField();

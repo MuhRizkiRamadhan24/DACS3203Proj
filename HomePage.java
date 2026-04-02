@@ -19,6 +19,11 @@ public class HomePage {
             Reservation res = new Reservation(stage);
             res.initializeComponents();
         });
+        Button viewResBtn = new Button("View Reservations");
+        viewResBtn.setOnAction(e -> {
+            ViewReservation view = new ViewReservation(stage);
+            view.initializeComponents();
+        });
         Button orderBtn = new Button("Orders");
         Button menuBtn = new Button("Menu");
         Button inventoryBtn = new Button("Inventory");
