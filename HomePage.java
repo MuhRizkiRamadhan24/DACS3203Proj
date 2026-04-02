@@ -31,6 +31,7 @@ public class HomePage {
 
         VBox layout = new VBox(10,
                 reservationBtn,
+                viewResBtn,
                 orderBtn,
                 menuBtn,
                 inventoryBtn,
