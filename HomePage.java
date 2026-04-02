@@ -35,6 +35,16 @@ public class HomePage {
             view.initializeComponents();
         });
         Button menuBtn = new Button("Menu");
+        Button addMenuBtn = new Button("Add Menu Item");
+        addMenuBtn.setOnAction(e -> {
+            AddMenu add = new AddMenu(stage);
+            add.initializeComponents();
+        });
+        Button viewMenuBtn = new Button("View Menu");
+        viewMenuBtn.setOnAction(e -> {
+            ViewMenu view = new ViewMenu(stage);
+            view.initializeComponents();
+        });
         Button inventoryBtn = new Button("Inventory");
         Button paymentBtn = new Button("Payments");
 
@@ -44,6 +54,8 @@ public class HomePage {
                 orderBtn,
                 viewOrderBtn,
                 menuBtn,
+                addMenuBtn,
+                viewMenuBtn,
                 inventoryBtn,
                 paymentBtn
         );

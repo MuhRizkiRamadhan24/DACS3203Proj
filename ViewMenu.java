@@ -17,19 +17,19 @@ public class ViewMenu {
 
     public void initializeComponents() {
 
-        TableView<MenuItem> table = new TableView<>();
+        TableView<Menu> table = new TableView<>();
 
-        TableColumn<MenuItem, String> nameCol = new TableColumn<>("Item");
+        TableColumn<Menu, String> nameCol = new TableColumn<>("Item");
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        TableColumn<MenuItem, Double> priceCol = new TableColumn<>("Price");
+        TableColumn<Menu, Double> priceCol = new TableColumn<>("Price");
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         table.getColumns().addAll(nameCol, priceCol);
 
-        ObservableList<MenuItem> list = FXCollections.observableArrayList(
-                new MenuItem("Burger", 25),
-                new MenuItem("Pizza", 40)
+        ObservableList<Menu> list = FXCollections.observableArrayList(
+                new Menu("Burger", 25),
+                new Menu("Pizza", 40)
         );
 
         table.setItems(list);
