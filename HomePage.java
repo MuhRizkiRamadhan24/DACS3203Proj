@@ -25,6 +25,10 @@ public class HomePage {
             view.initializeComponents();
         });
         Button orderBtn = new Button("Orders");
+        orderBtn.setOnAction(e -> {
+            CreateOrder order = new CreateOrder(stage);
+            order.initializeComponents();
+        });
         Button menuBtn = new Button("Menu");
         Button inventoryBtn = new Button("Inventory");
         Button paymentBtn = new Button("Payments");
