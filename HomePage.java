@@ -15,6 +15,10 @@ public class HomePage {
     public void initializeComponents() {
 
         Button reservationBtn = new Button("Reservations");
+        reservationBtn.setOnAction(e -> {
+            Reservation res = new Reservation(stage);
+            res.initializeComponents();
+        });
         Button orderBtn = new Button("Orders");
         Button menuBtn = new Button("Menu");
         Button inventoryBtn = new Button("Inventory");
