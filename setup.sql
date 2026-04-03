@@ -15,11 +15,14 @@ CREATE USER IF NOT EXISTS 'rms_user'@'localhost' IDENTIFIED BY 'StrongPassword12
 GRANT SELECT, INSERT, UPDATE, DELETE ON rms.* TO 'rms_user'@'localhost';
 FLUSH PRIVILEGES;
 
+
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     passwordHash VARCHAR(255) NOT NULL,
-    role VARCHAR(20) NOT NULL
+    role VARCHAR(20) NOT NULL,
+    firstName VARCHAR(50) NOT NULL,
+    lastName VARCHAR(50) NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS reservations (
@@ -44,20 +47,20 @@ CREATE TABLE IF NOT EXISTS order_items (
     );
 
 CREATE TABLE IF NOT EXISTS menu (
-                                    id INT AUTO_INCREMENT PRIMARY KEY,
-                                    name VARCHAR(100) NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
     price DOUBLE NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS inventory (
-                                         id INT AUTO_INCREMENT PRIMARY KEY,
-                                         itemName VARCHAR(100) NOT NULL,
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    itemName VARCHAR(100) NOT NULL,
     stockLevel INT NOT NULL
     );
 
 CREATE TABLE IF NOT EXISTS payments (
-                                        id INT AUTO_INCREMENT PRIMARY KEY,
-                                        orderId INT NOT NULL,
-                                        amount DOUBLE NOT NULL,
-                                        paymentDate DATE NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    orderId INT NOT NULL,
+    amount DOUBLE NOT NULL,
+    paymentDate DATE NOT NULL
 );
