@@ -7,9 +7,11 @@ import javafx.stage.Stage;
 public class CreateOrder {
 
     private Stage stage;
+    private User user;
 
-    public CreateOrder(Stage stage) {
+    public CreateOrder(Stage stage, User user) {
         this.stage = stage;
+        this.user = user;
     }
 
     public void initializeComponents() {
@@ -54,7 +56,7 @@ public class CreateOrder {
         });
 
         backButton.setOnAction(e -> {
-            HomePage home = new HomePage(stage);
+            HomePage home = new HomePage(stage, user);
             home.initializeComponents();
         });
 

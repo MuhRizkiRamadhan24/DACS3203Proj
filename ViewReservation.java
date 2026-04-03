@@ -10,9 +10,11 @@ import javafx.stage.Stage;
 public class ViewReservation {
 
     private Stage stage;
+    private User user;
 
-    public ViewReservation(Stage stage) {
+    public ViewReservation(Stage stage, User user) {
         this.stage = stage;
+        this.user = user;
     }
 
     public void initializeComponents() {
@@ -41,7 +43,7 @@ public class ViewReservation {
         Button backButton = new Button("Back");
 
         backButton.setOnAction(e -> {
-            HomePage home = new HomePage(stage);
+            HomePage home = new HomePage(stage,user);
             home.initializeComponents();
         });
 

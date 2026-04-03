@@ -7,11 +7,12 @@ import javafx.stage.Stage;
 public class Reservation {
 
     private Stage stage;
+    private User user;
 
-    public Reservation(Stage stage) {
+    public Reservation(Stage stage, User user) {
         this.stage = stage;
+        this.user = user;
     }
-
     public Reservation(String ali, String date, String number) {
     }
 
@@ -38,7 +39,7 @@ public class Reservation {
         });
 
         backButton.setOnAction(e -> {
-            HomePage home = new HomePage(stage);
+            HomePage home = new HomePage(stage, user);
             home.initializeComponents();
         });
 

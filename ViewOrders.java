@@ -10,11 +10,12 @@ import javafx.stage.Stage;
 public class ViewOrders {
 
     private Stage stage;
+    private User user;
 
-    public ViewOrders(Stage stage) {
+    public ViewOrders(Stage stage, User user) {
         this.stage = stage;
+        this.user = user;
     }
-
     public void initializeComponents() {
 
         TableView<Order> table = new TableView<>();
@@ -41,7 +42,7 @@ public class ViewOrders {
         Button backButton = new Button("Back");
 
         backButton.setOnAction(e -> {
-            HomePage home = new HomePage(stage);
+            HomePage home = new HomePage(stage, user);
             home.initializeComponents();
         });
 

@@ -7,11 +7,12 @@ import javafx.stage.Stage;
 public class AddMenu {
 
     private Stage stage;
+    private User user;
 
-    public AddMenu(Stage stage) {
+    public AddMenu(Stage stage, User user) {
         this.stage = stage;
+        this.user = user;
     }
-
     public void initializeComponents() {
 
         TextField nameField = new TextField();
@@ -41,7 +42,7 @@ public class AddMenu {
         });
 
         backButton.setOnAction(e -> {
-            HomePage home = new HomePage(stage);
+            HomePage home = new HomePage(stage, user);
             home.initializeComponents();
         });
 
