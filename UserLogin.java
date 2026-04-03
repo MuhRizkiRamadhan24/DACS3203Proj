@@ -28,9 +28,10 @@ public class UserLogin {
                 return;
             }
 
-            //no DB yet
-            if (username.equals("admin") && password.equals("1234")) {
-                HomePage home = new HomePage(stage);
+            User user = AuthenticationService.authenticate(username, password);
+
+            if (user != null) {
+                HomePage home = new HomePage(stage, user);
                 home.initializeComponents();
             } else {
                 showAlert("Error", "Invalid login");
