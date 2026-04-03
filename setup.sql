@@ -1,0 +1,63 @@
+-- =============================================
+-- RMS Database Setup
+-- Run this file in phpMyAdmin before starting
+-- Steps:
+-- 1. Open phpMyAdmin on your machine
+-- 2. Click SQL tab
+-- 3. Copy and paste everything in this file
+-- 4. Click Go
+-- 5. Use admin/1234 to login for now
+-- =============================================
+CREATE DATABASE IF NOT EXISTS rms;
+USE rms;
+
+CREATE USER IF NOT EXISTS 'rms_user'@'localhost' IDENTIFIED BY 'StrongPassword123';
+GRANT SELECT, INSERT, UPDATE, DELETE ON rms.* TO 'rms_user'@'localhost';
+FLUSH PRIVILEGES;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    passwordHash VARCHAR(255) NOT NULL,
+    role VARCHAR(20) NOT NULL
+    );
+
+CREATE TABLE IF NOT EXISTS reservations (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customerName VARCHAR(100) NOT NULL,
+    date DATE NOT NULL,
+    tableNumber INT NOT NULL
+    );
+
+CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    status VARCHAR(20) NOT NULL,
+    totalAmount DOUBLE NOT NULL
+    );
+
+CREATE TABLE IF NOT EXISTS order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    orderId INT NOT NULL,
+    itemName VARCHAR(100) NOT NULL,
+    quantity INT NOT NULL,
+    price DOUBLE NOT NULL
+    );
+
+CREATE TABLE IF NOT EXISTS menu (
+                                    id INT AUTO_INCREMENT PRIMARY KEY,
+                                    name VARCHAR(100) NOT NULL,
+    price DOUBLE NOT NULL
+    );
+
+CREATE TABLE IF NOT EXISTS inventory (
+                                         id INT AUTO_INCREMENT PRIMARY KEY,
+                                         itemName VARCHAR(100) NOT NULL,
+    stockLevel INT NOT NULL
+    );
+
+CREATE TABLE IF NOT EXISTS payments (
+                                        id INT AUTO_INCREMENT PRIMARY KEY,
+                                        orderId INT NOT NULL,
+                                        amount DOUBLE NOT NULL,
+                                        paymentDate DATE NOT NULL
+);
