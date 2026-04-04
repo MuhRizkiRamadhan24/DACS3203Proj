@@ -3,6 +3,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.sql.*;
 
 public class AddMenu {
 
@@ -31,7 +32,17 @@ public class AddMenu {
                     return;
                 }
 
-                showAlert("Success", "Menu item added (mock)");
+                try {
+                    Connection con = DBUtils.establishConnection();
+                    PreparedStatement ps = con.prepareStatement("INSERT INTO menu (name, price) VALUES (?, ?)");
+                    ps.setString(1, name);
+                    ps.setDouble(2, price);
+                    ps.executeUpdate();
+                    DBUtils.closeConnection(con);
+                    showAlert("Success", "Menu item added!");
+                } catch (Exception ex) {
+                    showAlert("Error", "Database error: " + ex.getMessage());
+                }
 
                 nameField.clear();
                 priceField.clear();
