@@ -64,3 +64,10 @@ CREATE TABLE IF NOT EXISTS payments (
     amount DOUBLE NOT NULL,
     paymentDate DATE NOT NULL
 );
+INSERT INTO users (username, passwordHash, role, firstName, lastName) VALUES
+    ('admin', '$2a$12$bRvfVSp5ckFg7hlJVEWk3.e.L8LnKXZNRzleUFxbVmp8lIMN0klm2', 'admin', 'Admin', 'User'),
+    ('manager1', '$2a$12$xlCU.5tyz9IowAxxddq8Te7DCERFPmny3o6pPiFMw97QmjR6TgYBq', 'manager', 'Sara', 'Ali'),
+    ('waiter1', '$2a$12$xlCU.5tyz9IowAxxddq8Te7DCERFPmny3o6pPiFMw97QmjR6TgYBq', 'waiter', 'Omar', 'Hassan'),
+    ('cashier1', '$2a$12$xlCU.5tyz9IowAxxddq8Te7DCERFPmny3o6pPiFMw97QmjR6TgYBq', 'cashier', 'Fatima', 'Said'),
+    ('chef1', '$2a$12$xlCU.5tyz9IowAxxddq8Te7DCERFPmny3o6pPiFMw97QmjR6TgYBq', 'chef', 'Khalid', 'Mohammed'),
+    ('invmanager1', '$2a$12$xlCU.5tyz9IowAxxddq8Te7DCERFPmny3o6pPiFMw97QmjR6TgYBq', 'inventorymanager', 'Layla', 'Ahmed');

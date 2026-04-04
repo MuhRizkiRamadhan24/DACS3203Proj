@@ -36,6 +36,12 @@ public class HomePage {
             ViewOrders view = new ViewOrders(stage, user);
             view.initializeComponents();
         });
+
+        Button staffBtn = new Button("Manage Staff");
+        staffBtn.setOnAction(e -> {
+            // coming in Phase 3
+        });
+
         Button ManageMenuBtn = new Button("Manage Menu");
         ManageMenuBtn.setOnAction(e -> {
             AddMenu add = new AddMenu(stage, user);
@@ -62,21 +68,43 @@ public class HomePage {
                 viewOrderBtn,
                 ManageMenuBtn,
                 viewMenuBtn,
+                staffBtn,
                 inventoryBtn,
                 paymentBtn,
                 logoutBtn
         );
 
-        if (AuthorizationService.isAdmin(user) ||
-                AuthorizationService.isManager(user)) {
-        } else {
+        if (!AuthorizationService.isAdmin(user) &&
+                !AuthorizationService.isManager(user) &&
+                !AuthorizationService.isWaiter(user)) {
+            reservationBtn.setVisible(false);
+            viewResBtn.setVisible(false);
+        }
+
+        if (!AuthorizationService.isAdmin(user) &&
+                !AuthorizationService.isManager(user)) {
             ManageMenuBtn.setVisible(false);
+        }
+
+        if (!AuthorizationService.isAdmin(user) &&
+                !AuthorizationService.isManager(user) &&
+                !AuthorizationService.isInventoryManager(user)) {
             inventoryBtn.setVisible(false);
+        }
+
+        if (!AuthorizationService.isAdmin(user) &&
+                !AuthorizationService.isManager(user) &&
+                !AuthorizationService.isCashier(user)) {
+            paymentBtn.setVisible(false);
+        }
+
+        if (!AuthorizationService.isAdmin(user)) {
+            staffBtn.setVisible(false);
         }
 
         layout.setPadding(new Insets(20));
 
-        stage.setScene(new Scene(layout, 400, 300));
+        stage.setScene(new Scene(layout, 400, 400));
         stage.setTitle("Restaurant System");
         stage.show();
     }
