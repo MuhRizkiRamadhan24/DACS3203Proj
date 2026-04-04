@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.sql.*;
 
 public class ViewOrders {
 
@@ -31,11 +32,24 @@ public class ViewOrders {
 
         table.getColumns().addAll(idCol, statusCol, totalCol);
 
-        // data(not actual)
-        ObservableList<Order> list = FXCollections.observableArrayList(
-                new Order("101", "Pending", 45.5),
-                new Order("102", "Completed", 88.0)
-        );
+        ObservableList<Order> list = FXCollections.observableArrayList();
+
+        try {
+            Connection con = DBUtils.establishConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT id, status, totalAmount FROM orders");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String id = rs.getString("id");
+                String status = rs.getString("status");
+                double total = rs.getDouble("totalAmount");
+                list.add(new Order(id, status, total));
+            }
+
+            DBUtils.closeConnection(con);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         table.setItems(list);
 
