@@ -43,10 +43,16 @@ public class HomePage {
             staff.initializeComponents();
         });
 
+        Button viewStaffBtn = new Button("View Staff");
+        viewStaffBtn.setOnAction(e -> {
+            ViewStaff view = new ViewStaff(stage, user);
+            view.initializeComponents();
+        });
+
         Button ManageMenuBtn = new Button("Manage Menu");
         ManageMenuBtn.setOnAction(e -> {
-            AddMenu add = new AddMenu(stage, user);
-            add.initializeComponents();
+            ManageMenu manage = new ManageMenu(stage, user);
+            manage.initializeComponents();
         });
         Button viewMenuBtn = new Button("View Menu");
         viewMenuBtn.setOnAction(e -> {
@@ -95,6 +101,7 @@ public class HomePage {
                 ManageMenuBtn,
                 viewMenuBtn,
                 staffBtn,
+                viewStaffBtn,
                 inventoryBtn,
                 viewInventoryBtn,
                 paymentBtn,
@@ -131,6 +138,7 @@ public class HomePage {
 
         if (!AuthorizationService.isAdmin(user)) {
             staffBtn.setVisible(false);
+            viewStaffBtn.setVisible(false);
         }
 
         if (!AuthorizationService.isAdmin(user) &&
@@ -140,7 +148,7 @@ public class HomePage {
 
         layout.setPadding(new Insets(20));
 
-        stage.setScene(new Scene(layout, 400, 470));
+        stage.setScene(new Scene(layout, 400, 500));
         stage.setTitle("Restaurant System");
         stage.show();
     }
