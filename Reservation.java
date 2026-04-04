@@ -3,18 +3,29 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.sql.*;
 
 public class Reservation {
 
     private Stage stage;
     private User user;
+    private String customerName;
+    private String date;
+    private String tableNumber;
 
     public Reservation(Stage stage, User user) {
         this.stage = stage;
         this.user = user;
     }
-    public Reservation(String ali, String date, String number) {
+    public Reservation(String customerName, String date, String tableNumber) {
+        this.customerName = customerName;
+        this.date = date;
+        this.tableNumber = tableNumber;
     }
+
+    public String getCustomerName() { return customerName; }
+    public String getDate() { return date; }
+    public String getTableNumber() { return tableNumber; }
 
     public void initializeComponents() {
 
@@ -34,8 +45,19 @@ public class Reservation {
                 showAlert("Error", "Fill all fields");
                 return;
             }
+            try {
+                Connection con = DBUtils.establishConnection();
+                PreparedStatement ps = con.prepareStatement("INSERT INTO reservations (customerName, date, tableNumber) VALUES (?, ?, ?)");
+                ps.setString(1, name);
+                ps.setString(2, date);
+                ps.setInt(3, Integer.parseInt(table));
+                ps.executeUpdate();
+                DBUtils.closeConnection(con);
+                showAlert("Success", "Reservation created!");;
+            } catch (Exception ex) {
+                showAlert("Error", "Database error: " + ex.getMessage());
+            }
 
-            showAlert("Success", "Reservation created (mock)");
         });
 
         backButton.setOnAction(e -> {
