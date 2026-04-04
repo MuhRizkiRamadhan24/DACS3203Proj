@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.sql.*;
 
 public class ViewMenu {
 
@@ -29,10 +30,23 @@ public class ViewMenu {
 
         table.getColumns().addAll(nameCol, priceCol);
 
-        ObservableList<Menu> list = FXCollections.observableArrayList(
-                new Menu("Burger", 25),
-                new Menu("Pizza", 40)
-        );
+        ObservableList<Menu> list = FXCollections.observableArrayList();
+
+        try {
+            Connection con = DBUtils.establishConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT name, price FROM menu");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("name");
+                double price = rs.getDouble("price");
+                list.add(new Menu(name, price));
+            }
+
+            DBUtils.closeConnection(con);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         table.setItems(list);
 
