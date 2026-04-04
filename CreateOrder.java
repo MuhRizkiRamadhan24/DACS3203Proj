@@ -17,7 +17,6 @@ public class CreateOrder {
 
     public void initializeComponents() {
 
-        TextField orderIdField = new TextField();
         TextField itemField = new TextField();
         TextField quantityField = new TextField();
         TextField priceField = new TextField();
@@ -70,15 +69,9 @@ public class CreateOrder {
         });
 
         saveButton.setOnAction(e -> {
-            if (orderIdField.getText().isEmpty()) {
-                showAlert("Error", "Enter order ID");
-                return;
-            }
-
             try {
                 Connection con = DBUtils.establishConnection();
-                PreparedStatement ps = con.prepareStatement(
-                        "INSERT INTO orders (status, totalAmount) VALUES (?, ?)",
+                PreparedStatement ps = con.prepareStatement("INSERT INTO orders (status, totalAmount) VALUES (?, ?)",
                         PreparedStatement.RETURN_GENERATED_KEYS);
                 ps.setString(1, "Pending");
                 ps.setDouble(2, total[0]);
@@ -108,7 +101,6 @@ public class CreateOrder {
         });
 
         VBox layout = new VBox(10,
-                new Label("Order ID"), orderIdField,
                 new Label("Item Name"), itemField,
                 new Label("Quantity"), quantityField,
                 new Label("Price"), priceField,
@@ -120,7 +112,7 @@ public class CreateOrder {
 
         layout.setPadding(new Insets(20));
 
-        stage.setScene(new Scene(layout, 400, 450));
+        stage.setScene(new Scene(layout, 400, 400));
         stage.setTitle("Create Order");
         stage.show();
     }
