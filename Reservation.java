@@ -41,8 +41,16 @@ public class Reservation {
             String date = dateField.getText();
             String table = tableField.getText();
 
-            if (name.isEmpty() || date.isEmpty() || table.isEmpty()) {
-                showAlert("Error", "Fill all fields");
+            if (!name.matches("^[a-zA-Z ]{2,50}$")) {
+                showAlert("Error", "Invalid customer name.");
+                return;
+            }
+            if (!date.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
+                showAlert("Error", "Date must be YYYY-MM-DD.");
+                return;
+            }
+            if (!table.matches("^[0-9]{1,3}$")) {
+                showAlert("Error", "Table number must be a number.");
                 return;
             }
             try {
