@@ -6,6 +6,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import java.sql.*;
 
 public class ViewReservation {
 
@@ -32,11 +33,24 @@ public class ViewReservation {
 
         table.getColumns().addAll(nameCol, dateCol, tableCol);
 
-        // no DB yet, Omar fix this
-        ObservableList<Reservation> list = FXCollections.observableArrayList(
-                new Reservation("Ali", "2026-04-10", "5"),
-                new Reservation("Sara", "2026-04-11", "2")
-        );
+        ObservableList<Reservation> list = FXCollections.observableArrayList();
+
+        try {
+            Connection con = DBUtils.establishConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT customerName, date, tableNumber FROM reservations");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("customerName");
+                String date = rs.getString("date");
+                String tableNum = rs.getString("tableNumber");
+                list.add(new Reservation(name, date, tableNum));
+            }
+
+            DBUtils.closeConnection(con);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         table.setItems(list);
 
