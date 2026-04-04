@@ -71,17 +71,3 @@ INSERT INTO users (username, passwordHash, role, firstName, lastName) VALUES
     ('cashier1', '$2a$12$xlCU.5tyz9IowAxxddq8Te7DCERFPmny3o6pPiFMw97QmjR6TgYBq', 'cashier', 'Fatima', 'Said'),
     ('chef1', '$2a$12$xlCU.5tyz9IowAxxddq8Te7DCERFPmny3o6pPiFMw97QmjR6TgYBq', 'chef', 'Khalid', 'Mohammed'),
     ('invmanager1', '$2a$12$xlCU.5tyz9IowAxxddq8Te7DCERFPmny3o6pPiFMw97QmjR6TgYBq', 'inventorymanager', 'Layla', 'Ahmed');
-
--- Test inventory items
-INSERT INTO inventory (itemName, stockLevel) VALUES
-    ('Tomatoes', 100),
-    ('Chicken', 50),
-    ('Rice', 200),
-    ('Olive Oil', 30),
-    ('Cheese', 75);
-
--- Test payments
-INSERT INTO payments (orderId, amount, paymentDate) VALUES
-    (1, 25.50, CURDATE()),
-    (2, 42.00, CURDATE()),
-    (3, 18.75, CURDATE());
