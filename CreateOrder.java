@@ -35,9 +35,24 @@ public class CreateOrder {
 
         addButton.setOnAction(e -> {
             try {
-                int qty = Integer.parseInt(quantityField.getText());
-                double price = Double.parseDouble(priceField.getText());
+                String item = itemField.getText().trim();
+                String qtyText = quantityField.getText().trim();
+                String priceText = priceField.getText().trim();
 
+                if (!item.matches("^[a-zA-Z ]{2,50}$")) {
+                    showAlert("Error", "Invalid item name.");
+                    return;
+                }
+                if (!qtyText.matches("^[0-9]{1,4}$")) {
+                    showAlert("Error", "Invalid quantity.");
+                    return;
+                }
+                if (!priceText.matches("^[0-9]+(\\.[0-9]{1,2})?$")) {
+                    showAlert("Error", "Invalid price.");
+                    return;
+                }
+                int qty = Integer.parseInt(qtyText);
+                double price = Double.parseDouble(priceText);
                 total[0] += qty * price;
                 totalLabel.setText("Total: " + total[0]);
 
