@@ -24,14 +24,18 @@ public class AddMenu {
 
         addButton.setOnAction(e -> {
             try {
-                String name = nameField.getText();
-                double price = Double.parseDouble(priceField.getText());
+                String name = nameField.getText().trim();
+                String priceText = priceField.getText().trim();
 
-                if (name.isEmpty()) {
-                    showAlert("Error", "Enter item name");
+                if (!name.matches("^[a-zA-Z ]{2,50}$")) {
+                    showAlert("Error", "Invalid item name.");
                     return;
                 }
-
+                if (!priceText.matches("^[0-9]+(\\.[0-9]{1,2})?$")) {
+                    showAlert("Error", "Invalid price.");
+                    return;
+                }
+                double price = Double.parseDouble(priceText);
                 try {
                     Connection con = DBUtils.establishConnection();
                     PreparedStatement ps = con.prepareStatement("INSERT INTO menu (name, price) VALUES (?, ?)");
