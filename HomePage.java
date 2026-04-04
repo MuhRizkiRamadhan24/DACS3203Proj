@@ -39,7 +39,8 @@ public class HomePage {
 
         Button staffBtn = new Button("Manage Staff");
         staffBtn.setOnAction(e -> {
-            // coming in Phase 3
+            AddStaff staff = new AddStaff(stage, user);
+            staff.initializeComponents();
         });
 
         Button ManageMenuBtn = new Button("Manage Menu");
@@ -53,7 +54,32 @@ public class HomePage {
             view.initializeComponents();
         });
         Button inventoryBtn = new Button("Inventory");
+        inventoryBtn.setOnAction(e -> {
+            AddInventory add = new AddInventory(stage, user);
+            add.initializeComponents();
+        });
+        Button viewInventoryBtn = new Button("View Inventory");
+        viewInventoryBtn.setOnAction(e -> {
+            ViewInventory view = new ViewInventory(stage, user);
+            view.initializeComponents();
+        });
+
         Button paymentBtn = new Button("Payments");
+        paymentBtn.setOnAction(e -> {
+            AddPayment add = new AddPayment(stage, user);
+            add.initializeComponents();
+        });
+        Button viewPaymentBtn = new Button("View Payments");
+        viewPaymentBtn.setOnAction(e -> {
+            ViewPayments view = new ViewPayments(stage, user);
+            view.initializeComponents();
+        });
+
+        Button reportBtn = new Button("Daily Sales Report");
+        reportBtn.setOnAction(e -> {
+            DailySalesReport report = new DailySalesReport(stage, user);
+            report.initializeComponents();
+        });
 
         Button logoutBtn = new Button("Logout");
         logoutBtn.setOnAction(e -> {
@@ -70,7 +96,10 @@ public class HomePage {
                 viewMenuBtn,
                 staffBtn,
                 inventoryBtn,
+                viewInventoryBtn,
                 paymentBtn,
+                viewPaymentBtn,
+                reportBtn,
                 logoutBtn
         );
 
@@ -90,21 +119,28 @@ public class HomePage {
                 !AuthorizationService.isManager(user) &&
                 !AuthorizationService.isInventoryManager(user)) {
             inventoryBtn.setVisible(false);
+            viewInventoryBtn.setVisible(false);
         }
 
         if (!AuthorizationService.isAdmin(user) &&
                 !AuthorizationService.isManager(user) &&
                 !AuthorizationService.isCashier(user)) {
             paymentBtn.setVisible(false);
+            viewPaymentBtn.setVisible(false);
         }
 
         if (!AuthorizationService.isAdmin(user)) {
             staffBtn.setVisible(false);
         }
 
+        if (!AuthorizationService.isAdmin(user) &&
+                !AuthorizationService.isManager(user)) {
+            reportBtn.setVisible(false);
+        }
+
         layout.setPadding(new Insets(20));
 
-        stage.setScene(new Scene(layout, 400, 400));
+        stage.setScene(new Scene(layout, 400, 470));
         stage.setTitle("Restaurant System");
         stage.show();
     }
